@@ -4,6 +4,7 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,6 +25,7 @@ namespace CSiteCapstone.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
             return View();
         }
         
@@ -96,41 +98,41 @@ namespace CSiteCapstone.Controllers
             return RedirectToAction("Login");
         }
 
-        //public ActionResult CampInfo()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        ////Campsite Owner Registration
-        //public ActionResult CampInfo(ImageFile objImage)
-        //{
-        //    foreach (var file in objImage.files)
-        //    {
-        //        if (file != null && file.ContentLength > 0)
-        //        {
-        //            file.SaveAs(Path.Combine(Server.MapPath("/Uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName)));
-        //        }
-        //    }
-        //    using (var connection = new MySqlConnection(connectionString))
-        //    {
-                
-        //        string query = "INSERT INTO `campinfo`(`CampName`, `CAmp_Location`,`Camp_Photo`, `Camp_Desc`) " +
-        //            "VALUES (@name, @location, @img,@desc)";
-        //        var command = new MySqlCommand(query, connection);
+        public ActionResult CampInfo()
+        {
+            return View();
+        }
+        [HttpPost]
+        //Campsite Owner Registration
+        public ActionResult CampInfo(ImageFile objImage)
+        {
+            foreach (var file in objImage.files)
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    file.SaveAs(Path.Combine(Server.MapPath("/Uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName)));
+                }
+            }
+            using (var connection = new MySqlConnection(connectionString))
+            {
 
-        //        command.Parameters.AddWithValue("@name", objImage.name);
-        //        command.Parameters.AddWithValue("@location", objImage.location);
-        //        command.Parameters.AddWithValue("@img", objImage.files);
-        //        command.Parameters.AddWithValue("@desc", objImage.desc);
-                
+                string query = "INSERT INTO `campinfo`(`CampName`, `CAmp_Location`,`Camp_Photo`, `Camp_Desc`) " +
+                    "VALUES (@name, @location, @img,@desc)";
+                var command = new MySqlCommand(query, connection);
 
-        //        connection.Open();
-        //        command.ExecuteNonQuery();
-        //    }
+                command.Parameters.AddWithValue("@name", objImage.name);
+                command.Parameters.AddWithValue("@location", objImage.location);
+                command.Parameters.AddWithValue("@img", objImage.files);
+                command.Parameters.AddWithValue("@desc", objImage.desc);
 
-        //        return RedirectToAction("Login");
-        //    }
-            public ActionResult Login()
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+
+            return RedirectToAction("Login");
+        }
+        public ActionResult Login()
             {
                 return View();
             }

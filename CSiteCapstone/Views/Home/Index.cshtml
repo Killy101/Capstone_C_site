@@ -1,5 +1,4 @@
-﻿﻿@model System.Data.DataTable
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
@@ -18,24 +17,6 @@
 
 
     </tr>
-
-    @{
-        for (int i = 0; i < Model.Rows.Count; i++)
-        {
-            <tr>
-                <th>@Model.Rows[i][0]</th>
-                <th>@Model.Rows[i][1]</th>
-                <th>@Model.Rows[i][2]</th>
-                <th>@Model.Rows[i][3]</th>
-                <th>@Model.Rows[i][4]</th>
-                <th>@Model.Rows[i][5]</th>
-                <th>@Model.Rows[i][6]</th>
-                <th>@Model.Rows[i][7]</th>
-
-            </tr>
-        }
-    }
-
 
 </table>
 

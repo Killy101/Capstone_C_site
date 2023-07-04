@@ -80,7 +80,7 @@ namespace CSiteCapstone.Controllers
                 {
                 string usertype = "Owner";
                 string query = "INSERT INTO `users`(`firstName`, `lastName`, `phone`, `email`, `username`, `password`, `usertype`) " +
-                "VALUES (@firstname,@lastname,@phone,@email,@username,@password','usertype')";
+                "VALUES (@firstname,@lastname,@phone,@email,@username,@password,@usertype)";
                     var command = new MySqlCommand(query, connection);
 
                     command.Parameters.AddWithValue("@firstname", models.fName);
